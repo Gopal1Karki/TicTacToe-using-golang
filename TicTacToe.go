@@ -84,7 +84,35 @@ LOOP:
 		fmt.Println("Player Two Turn")
 		fmt.Println("Enter the position Player Two:")
 	}
+GOP:
 	fmt.Scanln(&inp)
+	if inp < 1 || inp > 9 {
+		fmt.Println("Enter the valid position from 1-9 ")
+		fmt.Println("Enter the position again.")
+		goto GOP
+	}
+	if inp <= 3 {
+		if design[inp-1] == "X" || design[inp-1] == "O" {
+			fmt.Println("The value you have inserted is already taken position")
+			fmt.Println("Enter the position again.")
+			goto GOP
+		}
+	}
+	if inp > 3 && inp <= 6 {
+		if (design1[inp-4] == "X") || design1[inp-4] == "O" {
+			fmt.Println("The value you have inserted is already taken position")
+			fmt.Println("Enter the position again.")
+			goto GOP
+		}
+	}
+	if inp > 6 && inp <= 9 {
+		if design2[inp-7] == "X" || design2[inp-7] == "O" {
+			fmt.Println("The value you have inserted is already taken position")
+			fmt.Println("Enter the position again.")
+			goto GOP
+		}
+	}
+
 	a := inp
 	b := count
 	switch count {
@@ -104,7 +132,7 @@ LOOP:
 		fmt.Println(design1)
 		fmt.Println(design2)
 		time.Sleep(2 * time.Second)
-		if design[0] == design[1] && design[1] == design[2] && design[0] == "O" {
+		if design[0] == design[1] && design[1] == design[2] && design[0] == "O" && design[1] == "/0" {
 			fmt.Println("Player One wins")
 			gameOver()
 		}
@@ -137,7 +165,7 @@ LOOP:
 			gameOver()
 		}
 		goto LOOP
-	case 2, 4, 6, 8, 10:
+	case 2, 4, 6, 8:
 		fmt.Printf("Player 2 entered postion %d \n", inp)
 		if b == 2 || b == 4 || b == 6 || b == 8 {
 			if a == 1 || a == 2 || a == 3 {
